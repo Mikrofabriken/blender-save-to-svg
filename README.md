@@ -19,9 +19,9 @@ Go to [latest release](https://github.com/Mikrofabriken/blender-save-to-svg/rele
 
 # In object mode
 Select all objects you want to export, right click and select "Save as SVG". 
-![image](docs/selected_objects.png)
+![image](docs/selected_objects.jpeg)
 
 # In edit mode
 Select the face you want to export, right click and select "Save as SVG"
-![image](docs/edit_menu.png)
+![image](docs/edit_menu.jpeg)
 
