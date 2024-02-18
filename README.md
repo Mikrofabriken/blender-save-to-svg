@@ -7,7 +7,7 @@ Naturally, there are some quirks. As it's exporting a potential 3D object to SVG
 
 **Heads up:** Transforms will be automatically applied when running the stub. Mostly a convenience as the author of the plugin intermittently forgot to apply before exports. 
 
-The Blender file must be saved before export. Once the file is saved the expored .dxf will end up in the same folder, with the same name but a .svg extentions instead of .blend. No questions are asked, so other .svg files with the same name can be accidently overwritten.
+The Blender file must be saved before export. Once the file is saved the expored .svg will end up in the same folder, with the same name but a .svg extentions instead of .blend. No questions are asked, so other .svg files with the same name can be accidently overwritten.
 
 # Requirements
 If you're auditious enough to build a zip-file yourself this addon require:
@@ -15,7 +15,7 @@ If you're auditious enough to build a zip-file yourself this addon require:
 ``` svgwrite ```
 
 # Install
-Go to [latest release](https://github.com/Mikrofabriken/blender-save-to-svg/releases/latest) and download the addon zip-file. Go to Edit/Preferences/Add-ons in Blender and click the install button, select the downloaded zip-file and install. Check the box on "Save_as_dxf" and you should be done. All required dependencies will be automatically installed.
+Go to [latest release](https://github.com/Mikrofabriken/blender-save-to-svg/releases/latest) and download the addon zip-file. Go to Edit/Preferences/Add-ons in Blender and click the install button, select the downloaded zip-file and install. Check the box on "Save-as-svg" and you should be done. All required dependencies will be automatically installed.
 
 # In object mode
 Select all objects you want to export, right click and select "Save as SVG". 
