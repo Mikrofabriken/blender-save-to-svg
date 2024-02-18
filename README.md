@@ -12,7 +12,7 @@ The Blender file must be saved before export. Once the file is saved the expored
 # Requirements
 If you're auditious enough to build a zip-file yourself this addon require:
 
-``` ezdxf ```
+``` svgwrite ```
 
 # Install
 Go to [latest release](https://github.com/Mikrofabriken/blender-save-to-svg/releases/latest) and download the addon zip-file. Go to Edit/Preferences/Add-ons in Blender and click the install button, select the downloaded zip-file and install. Check the box on "Save_as_dxf" and you should be done. All required dependencies will be automatically installed.
