@@ -1,0 +1,58 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - v*
+    
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Set env
+        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+      - name: Create build dir
+        run: mkdir -p blender-save-to-svg
+      - name: Copy files
+        run: cp -a *.py blender-save-to-svg
+      - name: Get split version string
+        run: |
+          VERSION=`git describe --abbrev=0 --tags`
+          VERSION_BITS=(${VERSION//./ })
+          VNUM1=${VERSION_BITS[0]}
+          VNUM2=${VERSION_BITS[1]}
+          VNUM3=${VERSION_BITS[2]}
+          VNUM1=`echo $VNUM1 | sed 's/v//'`
+          echo "RELEASE_VERSION_SPLIT=${VNUM1},${VNUM2},${VNUM3}" >> $GITHUB_ENV
+      - name: Replace version in file
+        run: |
+          sed -i'' -e 's/"version" : (0, 0, 0)/"version" : (${{ env.RELEASE_VERSION_SPLIT }})/g' blender-save-to-svg/__init__.py
+          grep "version" blender-save-to-svg/__init__.py
+      - name: Zipfile
+        uses: montudor/action-zip@v1
+        with:
+          args: zip -qq -r blender-save-to-svg-${{ env.RELEASE_VERSION }}.zip blender-save-to-svg
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            Update version
+          draft: false
+          prerelease: false
+      - name: upload artifact
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: blender-save-to-svg-${{ env.RELEASE_VERSION }}.zip
+          asset_name: blender-save-to-svg-${{ env.RELEASE_VERSION }}.zip
+          asset_content_type: application/zip
